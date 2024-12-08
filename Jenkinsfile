@@ -1,25 +1,26 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/frizeone/JenkinsProject.git'
+                checkout scm
             }
         }
-
+        stage('Set Permissions') {
+            steps {
+                sh 'chmod +x build.sh run-tests.sh deploy.sh' 
+            }
+        }
         stage('Build') {
             steps {
                 sh './build.sh'
             }
         }
-
         stage('Test') {
             steps {
                 sh './run-tests.sh'
             }
         }
-
         stage('Deploy') {
             steps {
                 sh './deploy.sh'
