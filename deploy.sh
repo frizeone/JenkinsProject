@@ -18,8 +18,8 @@ if [ -z "$JAR_FILE" ]; then
     exit 1
 else
     echo "Found JAR file: $JAR_FILE"
-    # Запуск JAR-файла
-    java -jar "$JAR_FILE"
+    # Запуск JAR-файла в фоновом режиме
+    java -jar "$JAR_FILE" > deploy.log 2>&1 &
 
     # Проверка успешности запуска
     if [ $? -eq 0 ]; then
@@ -29,3 +29,5 @@ else
         exit 1
     fi
 fi
+
+exit 0
