@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Set Permissions') {
             steps {
-                sh 'chmod +x build.sh run-tests.sh deploy.sh' 
+                sh 'chmod +x build.sh run-tests.sh deploy.sh mvnw'  
             }
         }
         stage('Build') {
