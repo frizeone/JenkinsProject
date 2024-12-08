@@ -4,13 +4,28 @@ echo "Deploying the application..."
 # Печатаем текущую директорию
 echo "Current directory: $(pwd)"
 
+# Проверка наличия директории target
+if [ ! -d "target" ]; then
+    echo "Target directory not found!"
+    exit 1
+fi
+
 # Пытаемся найти JAR-файл в директории target
-JAR_FILE=$(find target -name "*.jar")
+JAR_FILE=$(find target -name "*.jar" -print -quit)
 
 if [ -z "$JAR_FILE" ]; then
     echo "JAR file not found!"
     exit 1
 else
     echo "Found JAR file: $JAR_FILE"
-    java -jar "$JAR_FILE"  # Запускаем приложение
+    # Запуск JAR-файла
+    java -jar "$JAR_FILE"
+
+    # Проверка успешности запуска
+    if [ $? -eq 0 ]; then
+        echo "Application started successfully."
+    else
+        echo "Application failed to start."
+        exit 1
+    fi
 fi

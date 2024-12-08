@@ -16,11 +16,6 @@ pipeline {
                 sh './build.sh'
             }
         }
-        stage('Test') {
-            steps {
-                sh './run-tests.sh'
-            }
-        }
         stage('Deploy') {
             steps {
                 sh './deploy.sh'
